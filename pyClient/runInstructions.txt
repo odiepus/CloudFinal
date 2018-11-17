@@ -1,0 +1,14 @@
+After docker is installed and started:
+    Create Docker Network for containers to run
+        docker network create --subnet=172.18.0.0/16 someNet
+
+    Create the images for the containers:
+        docker build -t python_server .  //run this in the folder containing the server files
+        docker build -t python_client .  //run this in folder containing the client files
+
+    Run images to create containers (Start with server):
+        //these can be run from anywhere
+        docker run --net someNet --ip 172.18.0.2 -i python_server
+        
+        //this container needs its own ip address for server to respond to
+        docker run --net someNet --ip 172.18.0.3 -i python_client 
